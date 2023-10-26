@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    private float progress = 0;
+    private int progress = 0;
     public Slider slider;
 
-    public void UpdateProgress() {
-        progress += 0.1f;
+    public void UpdateProgress()
+    {
+        progress += 1;
         slider.value = progress;
     }
 }
