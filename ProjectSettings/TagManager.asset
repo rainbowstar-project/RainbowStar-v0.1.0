@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ProgressBar
   - Portal
+  - Void
+  - Tilemap
   layers:
   - Default
   - TransparentFX

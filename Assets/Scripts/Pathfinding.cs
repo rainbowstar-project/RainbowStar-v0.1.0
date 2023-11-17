@@ -7,14 +7,13 @@ public class Pathfinding
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGNAL_COST = 1; // sqrt.(200)
     private Grid<PathNode> grid;
-    // nodes up to search
     private List<PathNode> openList;
-    // nodes already searched
+    // nodes up to search
     private List<PathNode> closedList;
-    public Pathfinding(int gridSize, Vector3 intanceGrid)
+    // nodes already searched
+    public Pathfinding(int gridSize, float cellSize, Vector3 intanceGrid)
     {
-        //grid = new Grid<PathNode>(width, height, 10f, Vector3.zero, (Grid<PathNode> g, int x, int y) => new PathNode(g, x, y));
-        grid = new Grid<PathNode>(gridSize, gridSize, 5f, intanceGrid, (Grid<PathNode> g, int x, int y) => new PathNode(g, x, y));
+        grid = new Grid<PathNode>(gridSize, gridSize, cellSize, intanceGrid, (Grid<PathNode> g, int x, int y) => new PathNode(g, x, y));
     }
     public Grid<PathNode> GetGrid()
     {
@@ -163,5 +162,17 @@ public class Pathfinding
             if(pathNodeList[i].fCost < lowestFCostNode.fCost) lowestFCostNode = pathNodeList[i];
         }
         return lowestFCostNode;
+    }
+
+    public List<Vector3> ToVector3(List<PathNode> path)
+    {
+        if (path == null) return null;
+        else {
+            List<Vector3> vectorPath = new List<Vector3>();
+            foreach (PathNode pathNode in path) {
+                vectorPath.Add(new Vector3(pathNode.x, pathNode.y) * grid.GetCellSize() + Vector3.one * grid.GetCellSize() * 5f);
+            }
+            return vectorPath;
+        }
     }
 }
