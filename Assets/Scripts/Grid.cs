@@ -80,6 +80,10 @@ public class Grid<TGridObject> {
         return new Vector3(x, y) * cellSize + originPosition;
     }
 
+    public Vector3 GetVector3Position(int x, int y) {
+        return new Vector3(originPosition.x + (cellSize * x + cellSize/2), originPosition.y + (cellSize * y + cellSize/2));
+    }
+
     public void GetXY(Vector3 worldPosition, out int x, out int y) {
         x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
         y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);

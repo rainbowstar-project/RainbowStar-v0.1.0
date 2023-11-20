@@ -7,12 +7,12 @@ using CodeMonkey;
 public class Testing : MonoBehaviour
 {
     [SerializeField]
-    public int gridSize = 0;  
+    public int gridSize = 0;
     [SerializeField]
     public float cellSize = 0;
     private Pathfinding pathfinding;
     private Vector3 instanceGrid;
-    private CompositeCollider2D collider; 
+    private CompositeCollider2D collider;
     private GameObject enemy;
     private void Start()
     {
@@ -21,7 +21,7 @@ public class Testing : MonoBehaviour
         pathfinding = new Pathfinding(gridSize, cellSize, instanceGrid);
 
         enemy = GameObject.Find("Enemy");
-        FindVoid();
+        FindVoidPath();
     }
     // private void Update()
     // {
@@ -40,21 +40,26 @@ public class Testing : MonoBehaviour
     //     }
     // }
 
-    private void FindVoid()
+    private void FindVoidPath()
     {
-        List<PathNode> path;
-
-        Vector3 voidPosition = GameObject.Find("PortalSaida").transform.position;
         Vector3 enemyPosition = enemy.transform.position;
-        pathfinding.GetGrid().GetXY(voidPosition, out int voidx, out int voidy);
-        pathfinding.GetGrid().GetXY(enemyPosition, out int enemyx, out int enemyy);
-        path = pathfinding.FindPath(enemyx, enemyy, voidx, voidy);
-        List<Vector3> pathVector = pathfinding.ToVector3(path);
+        Vector3 voidPosition = GameObject.Find("PortalSaida").transform.position;
+        print(enemyPosition);
 
-        if(pathfinding != null) {
+        // pathfinding.GetGrid().GetXY(voidPosition, out int voidX, out int voidY);
+        // pathfinding.GetGrid().GetXY(enemyPosition, out int enemyX, out int enemyY);
+
+        //pathNodeList = pathfinding.FindPath(enemyX, enemyY, voidX, voidY);
+        List<Vector3> path = pathfinding.FindPath(enemyPosition, voidPosition);
+        float step = 1.0f * Time.deltaTime;
+
+        if (pathfinding != null)
+        {
             // vilao vai ate o void
-            for(int i = 0; i < pathVector.Count -1; i++) {
-                enemy.transform.position += pathVector[i];
+            for (int i = 0; i < path.Count; i++)
+            {
+                print(i + " " + path[i]);
+                enemyPosition += path[i];
             }
         }
     }

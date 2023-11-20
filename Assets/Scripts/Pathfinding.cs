@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey.Utils;
+using CodeMonkey;
 
 public class Pathfinding
 {
@@ -23,15 +25,18 @@ public class Pathfinding
     {
         PathNode startNode = grid.GetGridObject(startX, startY);
         PathNode endNode = grid.GetGridObject(endX, endY);
-        openList = new List<PathNode> {startNode};
+        openList = new List<PathNode> { startNode };
         closedList = new List<PathNode>();
 
-        for(int x = 0; x < grid.GetWidth(); x++) {
-            for(int y = 0; y < grid.GetHeight(); y++) {
+        for (int x = 0; x < grid.GetWidth(); x++)
+        {
+            for (int y = 0; y < grid.GetHeight(); y++)
+            {
                 PathNode pathNode = grid.GetGridObject(x, y);
                 pathNode.gCost = int.MaxValue;
                 pathNode.CalculateFCost();
                 pathNode.parent = null;
+                pathNode.position = grid.GetVector3Position(x, y);
                 // initialize flag -> discover how verify colider
             }
         }
@@ -40,9 +45,11 @@ public class Pathfinding
         startNode.hCost = CalculateDistanceCost(startNode, endNode);
         startNode.CalculateFCost();
 
-        while (openList.Count > 0) {
+        while (openList.Count > 0)
+        {
             PathNode currentNode = GetLowestFCostNode(openList);
-            if(currentNode == endNode) {
+            if (currentNode == endNode)
+            {
                 // reached final node
                 return CalculatePath(endNode);
             }
@@ -52,31 +59,40 @@ public class Pathfinding
 
             int count = 0;
             int aux = 2;
-            foreach (PathNode neighborNode in GetNeighborList(currentNode)) {
-                switch (count) {
-                    case 0: aux = 2;
+            foreach (PathNode neighborNode in GetNeighborList(currentNode))
+            {
+                switch (count)
+                {
+                    case 0:
+                        aux = 2;
                         break;
-                    case 1: aux = 3;
+                    case 1:
+                        aux = 3;
                         break;
-                    case 2: aux = 0;
+                    case 2:
+                        aux = 0;
                         break;
-                    case 3: aux = 1;
+                    case 3:
+                        aux = 1;
                         break;
                 }
 
-                if (neighborNode != null && !closedList.Contains(neighborNode)) {
+                if (neighborNode != null && !closedList.Contains(neighborNode))
+                {
                     // if both dont't have walls
-                    if (!currentNode.flag[count] && !neighborNode.flag[aux]) {
+                    if (!currentNode.flag[count] && !neighborNode.flag[aux])
+                    {
                         // trying to find a faster path
                         int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighborNode);
-                        if(tentativeGCost < neighborNode.gCost) {
+                        if (tentativeGCost < neighborNode.gCost)
+                        {
                             neighborNode.parent = currentNode;
                             neighborNode.gCost = tentativeGCost;
                             neighborNode.hCost = CalculateDistanceCost(neighborNode, endNode);
                             neighborNode.CalculateFCost();
 
                             if (!openList.Contains(neighborNode)) openList.Add(neighborNode);
-                        }       
+                        }
                     }
                     //else closedList.Add(neighborNode);
                 }
@@ -100,16 +116,16 @@ public class Pathfinding
         List<PathNode> neighborList = new List<PathNode>();
 
         // the if's are only to check if the node is valid
-        if(currentNode.y + 1 < grid.GetHeight()) neighborList.Add(GetNode(currentNode.x, currentNode.y + 1)); // up
+        if (currentNode.y + 1 < grid.GetHeight()) neighborList.Add(GetNode(currentNode.x, currentNode.y + 1)); // up
         else neighborList.Add(null);
 
-        if(currentNode.x + 1 < grid.GetWidth()) neighborList.Add(GetNode(currentNode.x + 1, currentNode.y)); // right
+        if (currentNode.x + 1 < grid.GetWidth()) neighborList.Add(GetNode(currentNode.x + 1, currentNode.y)); // right
         else neighborList.Add(null);
 
-        if(currentNode.y - 1 >= 0) neighborList.Add(GetNode(currentNode.x, currentNode.y - 1)); // down
+        if (currentNode.y - 1 >= 0) neighborList.Add(GetNode(currentNode.x, currentNode.y - 1)); // down
         else neighborList.Add(null);
 
-        if(currentNode.x - 1 >= 0) neighborList.Add(GetNode(currentNode.x - 1, currentNode.y)); // left
+        if (currentNode.x - 1 >= 0) neighborList.Add(GetNode(currentNode.x - 1, currentNode.y)); // left
         else neighborList.Add(null);
 
         return neighborList;
@@ -133,7 +149,8 @@ public class Pathfinding
         path.Add(endNode);
         PathNode currentNode = endNode;
 
-        while(currentNode.parent != null) {
+        while (currentNode.parent != null)
+        {
             path.Add(currentNode.parent);
             currentNode = currentNode.parent;
         }
@@ -155,22 +172,30 @@ public class Pathfinding
         return remaining;
     }
 
-    private PathNode GetLowestFCostNode(List<PathNode> pathNodeList) 
+    private PathNode GetLowestFCostNode(List<PathNode> pathNodeList)
     {
         PathNode lowestFCostNode = pathNodeList[0];
-        for(int i = 1; i < pathNodeList.Count; i++) {
-            if(pathNodeList[i].fCost < lowestFCostNode.fCost) lowestFCostNode = pathNodeList[i];
+        for (int i = 1; i < pathNodeList.Count; i++)
+        {
+            if (pathNodeList[i].fCost < lowestFCostNode.fCost) lowestFCostNode = pathNodeList[i];
         }
         return lowestFCostNode;
     }
 
-    public List<Vector3> ToVector3(List<PathNode> path)
+    public List<Vector3> FindPath(Vector3 start, Vector3 end)
     {
+        grid.GetXY(start, out int startX, out int startY);
+        grid.GetXY(end, out int endX, out int endY);
+        List<PathNode> path = FindPath(startX, startY, endX, endY);
+
         if (path == null) return null;
-        else {
+        else
+        {
             List<Vector3> vectorPath = new List<Vector3>();
-            foreach (PathNode pathNode in path) {
-                vectorPath.Add(new Vector3(pathNode.x, pathNode.y) * grid.GetCellSize() + Vector3.one * grid.GetCellSize() * 5f);
+            foreach (PathNode pathNode in path)
+            {
+                // vectorPath.Add(new Vector3(pathNode.x, pathNode.y) * grid.GetCellSize() + new Vector3(-1/33, -1/33, 0) * grid.GetCellSize() * 5f);
+                vectorPath.Add(pathNode.position);
             }
             return vectorPath;
         }

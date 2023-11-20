@@ -10,6 +10,7 @@ public class PathNode
     public int gCost;
     public int hCost;
     public int fCost;
+    public Vector3 position;
 
     //public bool isWalkable;
     public PathNode parent;
