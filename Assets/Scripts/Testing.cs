@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 using CodeMonkey;
+using System.Threading.Tasks;
 
 public class Testing : MonoBehaviour
 {
@@ -16,12 +17,13 @@ public class Testing : MonoBehaviour
     private GameObject enemy;
     private void Start()
     {
+
         collider = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<CompositeCollider2D>();
         instanceGrid = collider.bounds.min;
         pathfinding = new Pathfinding(gridSize, cellSize, instanceGrid);
 
         enemy = GameObject.Find("Enemy");
-        FindVoidPath();
+        StartCoroutine(FindVoidPath());
     }
     // private void Update()
     // {
@@ -40,7 +42,7 @@ public class Testing : MonoBehaviour
     //     }
     // }
 
-    private void FindVoidPath()
+    IEnumerator FindVoidPath()
     {
         Vector3 enemyPosition = enemy.transform.position;
         Vector3 voidPosition = GameObject.Find("PortalSaida").transform.position;
@@ -58,8 +60,11 @@ public class Testing : MonoBehaviour
             // vilao vai ate o void
             for (int i = 0; i < path.Count; i++)
             {
+                yield return new WaitForSeconds(0.5f);
+
                 print(i + " " + path[i]);
-                enemyPosition += path[i];
+                enemy.transform.position = path[i];
+                // Task.Delay(5000);
             }
         }
     }

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CodeMonkey.Utils;
-using CodeMonkey;
 
 public class Pathfinding
 {
@@ -12,9 +10,11 @@ public class Pathfinding
     private List<PathNode> openList;
     // nodes up to search
     private List<PathNode> closedList;
+    private float cellSize;
     // nodes already searched
     public Pathfinding(int gridSize, float cellSize, Vector3 intanceGrid)
     {
+        this.cellSize = cellSize;
         grid = new Grid<PathNode>(gridSize, gridSize, cellSize, intanceGrid, (Grid<PathNode> g, int x, int y) => new PathNode(g, x, y));
     }
     public Grid<PathNode> GetGrid()
@@ -37,7 +37,8 @@ public class Pathfinding
                 pathNode.CalculateFCost();
                 pathNode.parent = null;
                 pathNode.position = grid.GetVector3Position(x, y);
-                // initialize flag -> discover how verify colider
+                // initialize flag
+                pathNode.SetFlag(cellSize/2);
             }
         }
 
