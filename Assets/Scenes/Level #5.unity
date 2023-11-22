@@ -1186,8 +1186,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-=======
 --- !u!70 &310065574
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1281,7 +1279,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> main
 --- !u!1 &387272129
 GameObject:
   m_ObjectHideFlags: 0
