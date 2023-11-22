@@ -38,7 +38,7 @@ public class Pathfinding
                 pathNode.parent = null;
                 pathNode.position = grid.GetVector3Position(x, y);
                 // initialize flag
-                pathNode.SetFlag(cellSize/2);
+                pathNode.SetFlag(cellSize / 2);
             }
         }
 
@@ -187,7 +187,7 @@ public class Pathfinding
     {
         grid.GetXY(start, out int startX, out int startY);
         grid.GetXY(end, out int endX, out int endY);
-        List<PathNode> path = FindPath(startX, startY, endX, endY);
+        List<PathNode> path = this.FindPath(startX, startY, endX, endY);
 
         if (path == null) return null;
         else

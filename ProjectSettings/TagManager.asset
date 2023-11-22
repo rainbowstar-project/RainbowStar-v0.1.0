@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - Void
   - Tilemap
+  - Enemy
   layers:
   - Default
   - TransparentFX
