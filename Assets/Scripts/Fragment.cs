@@ -16,6 +16,10 @@ public class Fragment : MonoBehaviour
     {
         if (collision.CompareTag("Player")) {
             fragmentCollect.Invoke();
+
+            //call player animation
+            collision.GetComponent<Animator>()?.Play("Blink");
+
             Destroy(gameObject);
         }
     }
