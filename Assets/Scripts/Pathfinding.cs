@@ -37,7 +37,6 @@ public class Pathfinding
                 pathNode.CalculateFCost();
                 pathNode.parent = null;
                 pathNode.position = grid.GetVector3Position(x, y);
-                // initialize flag
                 pathNode.SetFlag(cellSize / 2);
             }
         }
@@ -162,11 +161,6 @@ public class Pathfinding
 
     private int CalculateDistanceCost(PathNode a, PathNode b)
     {
-        // int xDistance = Mathf.Abs(a.x - b.x);
-        // int yDistance = Mathf.Abs(a.y - b.y);
-        // int remaining = Mathf.Abs(xDistance - yDistance);
-        // return MOVE_DIAGNAL_COST * Mathf.Min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
-
         int xDistance = Mathf.Abs(a.x - b.x);
         int yDistance = Mathf.Abs(a.y - b.y);
         int remaining = Mathf.Abs(xDistance + yDistance);
@@ -195,7 +189,6 @@ public class Pathfinding
             List<Vector3> vectorPath = new List<Vector3>();
             foreach (PathNode pathNode in path)
             {
-                // vectorPath.Add(new Vector3(pathNode.x, pathNode.y) * grid.GetCellSize() + new Vector3(-1/33, -1/33, 0) * grid.GetCellSize() * 5f);
                 vectorPath.Add(pathNode.position);
             }
             return vectorPath;

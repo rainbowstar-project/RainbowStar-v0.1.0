@@ -11,6 +11,7 @@ public class Testing : MonoBehaviour
     public int gridSize = 0;
     [SerializeField]
     public float cellSize = 0;
+    public int speed = 15;
     private Pathfinding pathfinding;
     private Vector3 instanceGrid;
     private CompositeCollider2D cc2d;
@@ -43,13 +44,14 @@ public class Testing : MonoBehaviour
             Move = StartCoroutine(Moving(i));
             yield return Move;
         }
+        Destroy(enemy);
     }
 
     IEnumerator Moving(int pos)
     {
         while (enemy.transform.position != path[pos])
         {
-            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, path[pos], 20 * Time.deltaTime);
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, path[pos], speed * Time.deltaTime);
             yield return null;
         }
     }

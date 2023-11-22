@@ -12,7 +12,6 @@ public class PathNode
     public int fCost;
     public Vector3 position;
 
-    //public bool isWalkable;
     public PathNode parent;
     // true -> wall
     // [UP, RIGHT, DOWN, LEFT]
@@ -53,12 +52,5 @@ public class PathNode
 
         RaycastHit2D hitLeft = Physics2D.Raycast(position, -Vector3.right, radius, layerMask);
         if (hitLeft.collider != null) flag[3] = true;
-
-        // Debug.Log(x + ", " + y);
-        // Debug.Log(flag[0]);
-        // Debug.Log(flag[1]);
-        // Debug.Log(flag[2]);
-        // Debug.Log(flag[3]);
-        // Debug.Log("--------------------------------");
     }
 }
