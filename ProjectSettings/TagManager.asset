@@ -6,6 +6,9 @@ TagManager:
   tags:
   - ProgressBar
   - Portal
+  - Void
+  - Tilemap
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - Water
   - UI
   - Minimap
-  - 
-  - 
+  - Grid A*
+  - Tilemap
   - 
   - 
   - 
@@ -45,6 +48,9 @@ TagManager:
     locked: 0
   - name: Map
     uniqueID: 2890445759
+    locked: 0
+  - name: Grid A*
+    uniqueID: 3413102881
     locked: 0
   - name: UI
     uniqueID: 3400883361
