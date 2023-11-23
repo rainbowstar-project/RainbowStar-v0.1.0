@@ -19,10 +19,10 @@ TagManager:
   - Minimap
   - Grid A*
   - Tilemap
-  - 
-  - 
-  - 
-  - 
+  - Fragment
+  - Enemy
+  - Player
+  - Portal
   - 
   - 
   - 
