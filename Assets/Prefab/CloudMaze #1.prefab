@@ -10268,12 +10268,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 706607756556045700, guid: deb528a389c4aa74ca1efba010293195, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 706607756556045700, guid: deb528a389c4aa74ca1efba010293195, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 706607756556045700, guid: deb528a389c4aa74ca1efba010293195, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063295344437592398, guid: deb528a389c4aa74ca1efba010293195, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1829258441262109346, guid: deb528a389c4aa74ca1efba010293195, type: 3}
       propertyPath: m_Layer
@@ -10321,7 +10329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4924835189789331717, guid: deb528a389c4aa74ca1efba010293195, type: 3}
       propertyPath: m_Name
-      value: Grid #1 Variant
+      value: CloudMaze #1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
