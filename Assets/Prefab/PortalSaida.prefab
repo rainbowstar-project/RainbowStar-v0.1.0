@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268d6eb0d47f1d04bb397ee79b9eea53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whiteHole: {fileID: -1562492999, guid: db23ea5d0751fdc41956e3204d3555ff, type: 3}
+  sr: {fileID: 4191455111662884232}
 --- !u!70 &2402140987864595780
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
