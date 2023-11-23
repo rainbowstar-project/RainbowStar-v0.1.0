@@ -6,7 +6,14 @@ using UnityEngine.Events;
 public class Fragment : MonoBehaviour
 {
     public UnityEvent fragmentCollect;
-    public GameManager game;
+    private GameManager game;
+
+    private AudioSource audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -17,13 +24,25 @@ public class Fragment : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) {
+
+            audioPlayer.Play();
             fragmentCollect.Invoke();
 
             //call player animation
             collision.GetComponent<Animator>()?.Play("Blink");
             game.AddFragmentToPlayer();
 
-            Destroy(gameObject);
+            StartCoroutine(Kill());
         }
+    }
+
+    private IEnumerator Kill()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        yield return new WaitForSeconds(1f);
+
+        gameObject.SetActive(false);
     }
 }
