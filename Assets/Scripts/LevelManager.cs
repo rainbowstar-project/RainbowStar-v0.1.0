@@ -12,15 +12,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        instance = this;
     }
 
     public void NextLevel()

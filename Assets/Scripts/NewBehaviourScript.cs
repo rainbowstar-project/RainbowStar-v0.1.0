@@ -20,7 +20,7 @@ public class Socorro : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement = new Vector2(Input.acceleration.x*2f, Input.acceleration.y*2.5f) * movementSpeed;
+        movement = new Vector2(Input.acceleration.x*3.5f, Input.acceleration.y*5f) * movementSpeed;
         rigid.AddForce(movement);
     }
 }

@@ -11,7 +11,7 @@ public class Testing : MonoBehaviour
     public int gridSize = 0;
     [SerializeField]
     public float cellSize = 0;
-    public int speed = 15;
+    public int speed = 10;
     private Pathfinding pathfinding;
     private Vector3 instanceGrid;
     private CompositeCollider2D cc2d;
@@ -34,6 +34,7 @@ public class Testing : MonoBehaviour
 
     IEnumerator FindVoidPath()
     {
+        yield return new WaitForSeconds(1);
         Vector3 enemyPosition = enemy.transform.position;
         Vector3 voidPosition = GameObject.Find("PortalSaida").transform.position;
 
