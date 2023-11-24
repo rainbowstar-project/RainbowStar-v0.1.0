@@ -8,7 +8,7 @@ public class Portal : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     private bool canEnter;
 
-    private int gameOverLevel = 8;
+    private int gameOverLevel = 9;
 
     private void Start()
     {
