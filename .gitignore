@@ -50,6 +50,8 @@ ExportedObj/
 *.opendb
 *.VC.db
 
+*.meta
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
@@ -73,5 +75,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+!/[Aa]ssets/**/*.meta
 
-# End of https://www.toptal.com/developers/gitignore/api/unity
+InitTestScene*.unity.meta
+InitTestScene*.unity
